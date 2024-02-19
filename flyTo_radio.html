@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Display map scale_radio</title>
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+/* .mapboxgl-ctrl-bottom-left {
+    bottom: 0;
+    left: 0;
+} */
+
+.mapboxgl-ctrl-scale {
+    background-color: hsla(0,0%,100%,.75);
+    border: 2px solid #333;
+    border-top: #333;
+    box-sizing: border-box;
+    color: #333;
+    font-size: 10px;
+    padding: 0 10px;
+    white-space: nowrap;
+    position: relative;
+    left: 100px;
+    top: 30px;
+}
+
+#radio_box{
+    display: flex;
+    position: relative;
+    width: 350px;
+    height: 50px;
+    z-index: 1;
+    background-color: white; 
+    outline: dashed 1px black;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+
+}
+
+</style>
+</head> 
+<body>
+    <div id="map"></div>
+    <div id="radio_box">
+    <from id="radio">
+        <input type="radio" name="chk_in" id="flyse">Seoul
+        <input type="radio" name="chk_in" id="flyty">Tokyo
+        <input type="radio" name="chk_in" id="flyld">London
+        <input type="radio" name="chk_in" id="flyny">NewYork
+    </from>
+    </div>
+
+
+    <script>
+        // TO MAKE THE MAP APPEAR YOU MUST
+        // ADD YOUR ACCESS TOKEN FROM
+        // https://account.mapbox.com
+        mapboxgl.accessToken = 'pk.eyJ1Ijoia3NhbmFnaW1vdG9rbyIsImEiOiJjbGQyZ3FtaDAwNm9rM3dyNHk4c28xcWh0In0.1lgpDKRzC0nNxdUFJ4MLOg';
+    const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+    style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    center: [127.0016985, 37.413294], // starting position
+    zoom: 9, // starting zoom
+    });
+    
+    // Add a scale control to the map
+    map.addControl(new mapboxgl.ScaleControl());
+    
+    // If you click this button , map will change the postion ; writer park jong hyo
+    document.getElementById('flyny').addEventListener('click', () => {
+        // Fly to a NewYork
+        map.flyTo({
+            center: [-73.990494, 40.7569545],
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+    });
+    
+    document.getElementById('flyld').addEventListener('click', () => {
+        // Fly to a London
+        map.flyTo({
+            center: [-0.1275, 51.5072],
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+    });
+    
+    document.getElementById('flyty').addEventListener('click', () => {
+        // Fly to a Tokyo
+        map.flyTo({
+            center: [139.692, 35.6894],
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+    });
+    
+    document.getElementById('flyse').addEventListener('click', () => {
+        // Fly to a Seoul
+        goToSeoul();
+    });
+
+
+    function goToSeoul () {
+        map.flyTo({
+            center: [127.0016985, 37.413294],
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+
+    }
+
+    
+    </script>
+</body>
+</html>
