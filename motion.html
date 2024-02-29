@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+.phone {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 5px solid #ccc;
+  border-radius: 10px;
+}
+
+.check {
+  position: absolute;
+  top: 90px;
+  left: 90px;
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 100%;
+}
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="phone">
+        <div class="check"></div>
+      </div>
+      <pre class="output"></pre>
+
+ <script>  
+const check = document.querySelector(".check");
+const phone = document.querySelector(".phone");
+const output = document.querySelector(".output");
+
+const maxX = phone.clientWidth - check.clientWidth;
+const maxY = phone.clientHeight - check.clientHeight;
+
+function handleOrientation(event) { 
+  let x = event.beta;
+  let y = event.gamma;
+  let z = event.alpha;
+
+  output.textContent = `베타: ${x}\n`;
+  output.textContent += `감마: ${y}\n`;
+  output.textContent += `알파: ${z}\n`;
+
+
+  if (x > 90) {
+    x = 90;
+  }
+  if (x < -90) {
+    x = -90;
+  }
+
+
+  x += 90;
+  y += 90;
+
+  check.style.left = `${(maxY * y) / 180 - 10}px`; 
+  check.style.top = `${(maxX * x) / 180 - 10}px`; 
+}
+window.addEventListener("deviceorientation", handleOrientation);
+
+</script> 
+
+</div>
+</body>
+</html>
