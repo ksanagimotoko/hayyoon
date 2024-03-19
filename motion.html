@@ -25,6 +25,7 @@
     <title>Document</title>
 </head>
 <body>
+  <button onclick="checkiOS()">click</button>
     <div class="phone">
         <div class="check"></div>
       </div>
@@ -61,8 +62,69 @@ function handleOrientation(event) {
 
   check.style.left = `${(maxY * y) / 180 - 10}px`; 
   check.style.top = `${(maxX * x) / 180 - 10}px`; 
+
 }
-window.addEventListener("deviceorientation", handleOrientation);
+
+
+
+// const sensor = new AbsoluteOrientationSensor();
+// Promise.all([navigator.permissions.query({ name: "accelerometer" }),
+//              navigator.permissions.query({ name: "magnetometer" }),
+//              navigator.permissions.query({ name: "gyroscope" })])
+//        .then(results => {
+//          if (results.every(result => result.state === "granted")) {
+//            sensor.start();
+
+//           window.addEventListener("deviceorientation", handleOrientation );
+//          } else {
+//            console.log("No permissions to use AbsoluteOrientationSensor.");
+//          }
+//    });
+
+
+// const checkiOS = async () => {
+//   console.log('test');
+//         const iOS = typeof requestPermission === 'function';
+//         if (iOS) {
+//             const response = await requestPermission();
+//             if (response === 'granted') {
+//                 window.addEventListener('deviceorientation', handleOrientation, false);
+//             }
+//         } else {
+//             console.log('not ios');
+//         }
+//     };
+
+
+
+// // IOS 13 버전 이상 check
+// const CHECK = typeof DeviceOrientationEvent.requestPermission === "function";
+
+// if (CHECK) {
+//   // 권한 요청
+//   window.DeviceOrientationEvent.requestPermission()
+//     .then((permissionState) => {
+//       if (permissionState === "granted") {
+//         window.addEventListener("deviceorientation", handleOrientation );
+//       }
+//     })
+//     .catch(() => {
+//       alert("권한을 허용해주세요.");
+//     });
+// // } else {
+//   // IOS 13 버전 이하는 권한 요청 없이 사용 가능
+
+//         // window.addEventListener("deviceorientation", handleOrientation );
+// }
+
+
+
+// if(window.DeviceOrientationEvent){
+
+window.addEventListener("deviceorientation", handleOrientation,false);
+// }else{
+  // alert('sorry doesn\'t support Device Orientation');
+// }
 
 </script> 
 
